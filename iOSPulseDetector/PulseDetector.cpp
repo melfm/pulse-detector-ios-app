@@ -174,7 +174,7 @@ PU PulseDetector::estimateBPM(const cv::Mat& skin) {
     dump_float("Interpolation Accel", outputInterpolation);
     
     // One dimensional Discrete FFT
-    vector<gsl_complex> fftraw = fft_transform(interpolated);
+    //vector<gsl_complex> fftraw = fft_transform(interpolated);
     
     // The Main FFT Helper
     FFTHelperRef *fftConverter = NULL;
@@ -184,13 +184,13 @@ PU PulseDetector::estimateBPM(const cv::Mat& skin) {
     
     float *fftData = computeFFT(fftConverter, outputInterpolation, sampleSize);
     
-    vector<double> angles = calculate_complex_angle(fftraw);
+    //vector<double> angles = calculate_complex_angle(fftraw);
     
     vector<float> angles_Float = calculate_complex_angle_float(fftConverter, sampleSize);
     
 
     // Get absolute values of FFT coefficients
-    _fftabs = calculate_complex_abs(fftraw);
+   // _fftabs = calculate_complex_abs(fftraw);
     
     
    // dump("Complex abs", _fftabs);
@@ -208,7 +208,7 @@ PU PulseDetector::estimateBPM(const cv::Mat& skin) {
     // Used filtered indices to get corresponding fft values, angles, and frequencies
     _fftabs = list_pruned(_fftabs, fitered_indices);
     freqs = list_pruned(freqs, fitered_indices);
-    angles = list_pruned(angles, fitered_indices);
+    //angles = list_pruned(angles, fitered_indices);
     
     int max = list_argmax(_fftabs);
     
@@ -252,38 +252,38 @@ vector<double> PulseDetector::arange(int stop) {
 // Transform data to FFT
 //http://www.gnu.org/software/gsl/manual/gsl-ref_16.html
 //
-vector<gsl_complex> PulseDetector::fft_transform(vector<double>& samples) {
-    int size = samples.size();
-    double data[size];
-    copy(samples.begin(), samples.end(), data);
-    // Transform to fft
-    gsl_fft_real_workspace* work = gsl_fft_real_workspace_alloc(size);
-    gsl_fft_real_wavetable* real = gsl_fft_real_wavetable_alloc(size);
-    gsl_fft_real_transform(data, 1, size, real, work);
-    gsl_fft_real_wavetable_free(real);
-    gsl_fft_real_workspace_free(work);
-    // Unpack complex numbers
-    gsl_complex unpacked[size];
-    gsl_fft_halfcomplex_unpack(data, (double *) unpacked, 1, size);
-    // Copy to  a vector
-    int unpacked_size = size / 2 + 1;
-    vector<gsl_complex> output(unpacked, unpacked + unpacked_size);
-    
-    return output;
-}
+//vector<gsl_complex> PulseDetector::fft_transform(vector<double>& samples) {
+//    int size = samples.size();
+//    double data[size];
+//    copy(samples.begin(), samples.end(), data);
+//    // Transform to fft
+//    gsl_fft_real_workspace* work = gsl_fft_real_workspace_alloc(size);
+//    gsl_fft_real_wavetable* real = gsl_fft_real_wavetable_alloc(size);
+//    gsl_fft_real_transform(data, 1, size, real, work);
+//    gsl_fft_real_wavetable_free(real);
+//    gsl_fft_real_workspace_free(work);
+//    // Unpack complex numbers
+//    gsl_complex unpacked[size];
+//    gsl_fft_halfcomplex_unpack(data, (double *) unpacked, 1, size);
+//    // Copy to  a vector
+//    int unpacked_size = size / 2 + 1;
+//    vector<gsl_complex> output(unpacked, unpacked + unpacked_size);
+//    
+//    return output;
+//}
 
 //
 // Get angles of raw fft coefficients
 //
-vector<double> PulseDetector::calculate_complex_angle(vector<gsl_complex> cvalues) {
-    // Get angles for a given complex number
-    vector<double> output(cvalues.size());
-    for (int i = 0; i< cvalues.size(); i++) {
-        double angle = atan2(GSL_IMAG(cvalues[i]), GSL_REAL(cvalues[i]));
-        output[i] = angle;
-    }
-    return output;
-}
+//vector<double> PulseDetector::calculate_complex_angle(vector<gsl_complex> cvalues) {
+//    // Get angles for a given complex number
+//    vector<double> output(cvalues.size());
+//    for (int i = 0; i< cvalues.size(); i++) {
+//        double angle = atan2(GSL_IMAG(cvalues[i]), GSL_REAL(cvalues[i]));
+//        output[i] = angle;
+//    }
+//    return output;
+//}
 
 //
 // Get angles of raw fft coefficients
@@ -298,17 +298,17 @@ vector<float> PulseDetector::calculate_complex_angle_float(FFTHelperRef* ffthelp
     return output;
 }
 
-vector<double> PulseDetector::calculate_complex_abs(vector<gsl_complex> cvalues) {
-    // Calculate absolute value of a given complex number
-    vector<double> output(cvalues.size());
-    for (int i =0; i < cvalues.size(); i++) {
-        output[i] = gsl_complex_abs(cvalues[i]);
-    }
-    return output;
-}
+//vector<double> PulseDetector::calculate_complex_abs(vector<gsl_complex> cvalues) {
+//    // Calculate absolute value of a given complex number
+//    vector<double> output(cvalues.size());
+//    for (int i =0; i < cvalues.size(); i++) {
+//        output[i] = gsl_complex_abs(cvalues[i]);
+//    }
+//    return output;
+//}
 
 //
-// Interpolate function
+// Interpolate function  TODO Use accelerate interpolation function instead
 //
 vector<double> PulseDetector::interp(vector<double> interp_x, vector<double> data_x, vector<double> data_y) {
     assert (data_x.size() == data_y.size());
@@ -329,19 +329,19 @@ vector<double> PulseDetector::interp(vector<double> interp_x, vector<double> dat
     long int L = interp_x.size();
     
     gsl_interp_accel *acc = gsl_interp_accel_alloc ();
-    gsl_spline *spline = gsl_spline_alloc (gsl_interp_linear, L);
-    gsl_spline_init (spline, data_x_array, data_y_array, L);
-    
-    // BUGFIX: Need to iterate throuh given x-interpolation range
-    for(int xi = 0; xi < interp_x.size(); xi++)
-    {
-        yi = gsl_spline_eval (spline, interp_x[xi], acc);
-        interpRes.push_back(yi);
-       // printf ("%g\n", yi);
-    }
-    
-    gsl_spline_free (spline);
-    gsl_interp_accel_free (acc);
+//    gsl_spline *spline = gsl_spline_alloc (gsl_interp_linear, L);
+//    gsl_spline_init (spline, data_x_array, data_y_array, L);
+//    
+//    // BUGFIX: Need to iterate throuh given x-interpolation range
+//    for(int xi = 0; xi < interp_x.size(); xi++)
+//    {
+//        yi = gsl_spline_eval (spline, interp_x[xi], acc);
+//        interpRes.push_back(yi);
+//       // printf ("%g\n", yi);
+//    }
+//    
+//    gsl_spline_free (spline);
+//    gsl_interp_accel_free (acc);
     
     return interpRes;
 }

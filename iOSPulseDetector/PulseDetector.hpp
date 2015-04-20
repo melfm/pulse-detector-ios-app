@@ -20,12 +20,13 @@
 #include "boost/accumulators/statistics/stats.hpp"
 #include "boost/accumulators/statistics/mean.hpp"
 
-#include <gsl/gsl_errno.h>
-#include <gsl/gsl_spline.h>
-#include <gsl/gsl_complex.h>
-#include <gsl/gsl_complex_math.h>
-#include <gsl/gsl_fft_real.h>
-#include <gsl/gsl_fft_halfcomplex.h>
+#include "gsl_errno.h"
+#include "gsl_spline.h"
+#include "gsl_interp.h"
+//#include <gsl/gsl_complex.h>
+//#include <gsl/gsl_complex_math.h>
+//#include <gsl/gsl_fft_real.h>
+//#include <gsl/gsl_fft_halfcomplex.h>
 
 #import <Accelerate/Accelerate.h>
 
@@ -98,10 +99,10 @@ public:
     vector<double> hammingWindow(int M);
     vector<double> interp(vector<double> interp_x, vector<double> data_x, vector<double> data_y);
     
-    vector<gsl_complex> fft_transform(vector<double>& samples);
-    vector<double> complex_angles(vector<gsl_complex> cvalues);
-    vector<double> calculate_complex_angle(vector<gsl_complex> cvalues);
-    vector<double> calculate_complex_abs(vector<gsl_complex> cvalues);
+//    vector<gsl_complex> fft_transform(vector<double>& samples);
+//    vector<double> complex_angles(vector<gsl_complex> cvalues);
+//    vector<double> calculate_complex_angle(vector<gsl_complex> cvalues);
+//    vector<double> calculate_complex_abs(vector<gsl_complex> cvalues);
     
     
     vector<float> calculate_complex_angle_float(FFTHelperRef* ffthelper, int size);
@@ -145,13 +146,13 @@ public:
         }
         printf("\n");
     }
-    void dump_complex(const string& label, vector<gsl_complex> data) {
-        printf("%s",label.c_str());
-        for (int i = 0; i < data.size(); ++i) {
-            printf("[%lf : %lf]", GSL_REAL(data[i]), GSL_IMAG(data[i]));
-        }
-        printf("\n");
-    }
+//    void dump_complex(const string& label, vector<gsl_complex> data) {
+//        printf("%s",label.c_str());
+//        for (int i = 0; i < data.size(); ++i) {
+//            printf("[%lf : %lf]", GSL_REAL(data[i]), GSL_IMAG(data[i]));
+//        }
+//        printf("\n");
+//    }
     void dump_float(const string& label, float *data) {
         printf("%s",label.c_str());
         for (int i = 0; i < sizeof(data); ++i) {
