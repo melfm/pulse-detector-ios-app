@@ -24,6 +24,17 @@
 		8DA86BF71AE45EF100E9AF2F /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86BF61AE45EF100E9AF2F /* error.c */; };
 		8DA86BFA1AE45F7800E9AF2F /* interp.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86BF91AE45F7800E9AF2F /* interp.c */; };
 		8DA86C031AE460A100E9AF2F /* stream.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C021AE460A100E9AF2F /* stream.c */; };
+		8DA86C181AE6ED4900E9AF2F /* hc_unpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C171AE6ED4900E9AF2F /* hc_unpack.c */; };
+		8DA86C1B1AE6F06700E9AF2F /* real_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C1A1AE6F06700E9AF2F /* real_main.c */; };
+		8DA86C1F1AE6F54F00E9AF2F /* factorize.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C1D1AE6F54F00E9AF2F /* factorize.c */; };
+		8DA86C221AE6FB9200E9AF2F /* real_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C211AE6FB9200E9AF2F /* real_init.c */; };
+		8DA86C241AE7046800E9AF2F /* math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C231AE7046800E9AF2F /* math.c */; };
+		8DA86C261AE705FD00E9AF2F /* hypot.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C251AE705FD00E9AF2F /* hypot.c */; };
+		8DA86C281AE7065D00E9AF2F /* invhyp.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C271AE7065D00E9AF2F /* invhyp.c */; };
+		8DA86C2A1AE7070000E9AF2F /* infnan.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C291AE7070000E9AF2F /* infnan.c */; };
+		8DA86C2C1AE7078C00E9AF2F /* fdiv.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C2B1AE7078C00E9AF2F /* fdiv.c */; };
+		8DA86C2E1AEBD6A700E9AF2F /* log1p.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C2D1AEBD6A700E9AF2F /* log1p.c */; };
+		8DA86C331AEC284600E9AF2F /* linear.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C321AEC284600E9AF2F /* linear.c */; };
 		8DBA87741A4C910200530FB7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA876F1A4C910200530FB7 /* AppDelegate.m */; };
 		8DBA87751A4C910200530FB7 /* PulseDetector-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DBA87701A4C910200530FB7 /* PulseDetector-Info.plist */; };
 		8DBA87761A4C910200530FB7 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA87731A4C910200530FB7 /* ViewController.mm */; };
@@ -74,6 +85,26 @@
 		8DA86C011AE4602400E9AF2F /* gsl_precision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gsl_precision.h; sourceTree = "<group>"; };
 		8DA86C021AE460A100E9AF2F /* stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stream.c; sourceTree = "<group>"; };
 		8DA86C061AE4610A00E9AF2F /* gsl_fit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gsl_fit.h; sourceTree = "<group>"; };
+		8DA86C121AE6EB0D00E9AF2F /* gsl_complex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gsl_complex.h; sourceTree = "<group>"; };
+		8DA86C131AE6EB6A00E9AF2F /* gsl_complex_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gsl_complex_math.h; sourceTree = "<group>"; };
+		8DA86C141AE6EC0000E9AF2F /* gsl_fft_halfcomplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gsl_fft_halfcomplex.h; sourceTree = "<group>"; };
+		8DA86C151AE6EC0000E9AF2F /* gsl_fft_real.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gsl_fft_real.h; sourceTree = "<group>"; };
+		8DA86C161AE6EC5900E9AF2F /* gsl_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gsl_fft.h; sourceTree = "<group>"; };
+		8DA86C171AE6ED4900E9AF2F /* hc_unpack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hc_unpack.c; sourceTree = "<group>"; };
+		8DA86C191AE6EDBF00E9AF2F /* complex_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = complex_internal.h; sourceTree = "<group>"; };
+		8DA86C1A1AE6F06700E9AF2F /* real_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = real_main.c; sourceTree = "<group>"; };
+		8DA86C1C1AE6F0B000E9AF2F /* real_pass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = real_pass.h; sourceTree = "<group>"; };
+		8DA86C1D1AE6F54F00E9AF2F /* factorize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = factorize.c; sourceTree = "<group>"; };
+		8DA86C1E1AE6F54F00E9AF2F /* factorize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = factorize.h; sourceTree = "<group>"; };
+		8DA86C201AE6F5A000E9AF2F /* gsl_fft_complex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gsl_fft_complex.h; sourceTree = "<group>"; };
+		8DA86C211AE6FB9200E9AF2F /* real_init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = real_init.c; sourceTree = "<group>"; };
+		8DA86C231AE7046800E9AF2F /* math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = math.c; sourceTree = "<group>"; };
+		8DA86C251AE705FD00E9AF2F /* hypot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hypot.c; sourceTree = "<group>"; };
+		8DA86C271AE7065D00E9AF2F /* invhyp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = invhyp.c; sourceTree = "<group>"; };
+		8DA86C291AE7070000E9AF2F /* infnan.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = infnan.c; sourceTree = "<group>"; };
+		8DA86C2B1AE7078C00E9AF2F /* fdiv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fdiv.c; sourceTree = "<group>"; };
+		8DA86C2D1AEBD6A700E9AF2F /* log1p.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = log1p.c; sourceTree = "<group>"; };
+		8DA86C321AEC284600E9AF2F /* linear.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = linear.c; sourceTree = "<group>"; };
 		8DBA876E1A4C910200530FB7 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = iOSPulseDetector/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		8DBA876F1A4C910200530FB7 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = iOSPulseDetector/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		8DBA87701A4C910200530FB7 /* PulseDetector-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "PulseDetector-Info.plist"; path = "iOSPulseDetector/PulseDetector-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -193,6 +224,27 @@
 		8DA86BE21AE4555D00E9AF2F /* MathsHelper */ = {
 			isa = PBXGroup;
 			children = (
+				8DA86C321AEC284600E9AF2F /* linear.c */,
+				8DA86C2D1AEBD6A700E9AF2F /* log1p.c */,
+				8DA86C2B1AE7078C00E9AF2F /* fdiv.c */,
+				8DA86C291AE7070000E9AF2F /* infnan.c */,
+				8DA86BFC1AE45FC900E9AF2F /* gsl_sys.h */,
+				8DA86C271AE7065D00E9AF2F /* invhyp.c */,
+				8DA86C251AE705FD00E9AF2F /* hypot.c */,
+				8DA86C231AE7046800E9AF2F /* math.c */,
+				8DA86C211AE6FB9200E9AF2F /* real_init.c */,
+				8DA86C201AE6F5A000E9AF2F /* gsl_fft_complex.h */,
+				8DA86C1D1AE6F54F00E9AF2F /* factorize.c */,
+				8DA86C1E1AE6F54F00E9AF2F /* factorize.h */,
+				8DA86C1C1AE6F0B000E9AF2F /* real_pass.h */,
+				8DA86C1A1AE6F06700E9AF2F /* real_main.c */,
+				8DA86C191AE6EDBF00E9AF2F /* complex_internal.h */,
+				8DA86C171AE6ED4900E9AF2F /* hc_unpack.c */,
+				8DA86C161AE6EC5900E9AF2F /* gsl_fft.h */,
+				8DA86C141AE6EC0000E9AF2F /* gsl_fft_halfcomplex.h */,
+				8DA86C151AE6EC0000E9AF2F /* gsl_fft_real.h */,
+				8DA86C131AE6EB6A00E9AF2F /* gsl_complex_math.h */,
+				8DA86C121AE6EB0D00E9AF2F /* gsl_complex.h */,
 				8DA86C061AE4610A00E9AF2F /* gsl_fit.h */,
 				8DA86C021AE460A100E9AF2F /* stream.c */,
 				8DA86BFD1AE4602400E9AF2F /* gsl_machine.h */,
@@ -200,7 +252,6 @@
 				8DA86BFF1AE4602400E9AF2F /* gsl_nan.h */,
 				8DA86C001AE4602400E9AF2F /* gsl_pow_int.h */,
 				8DA86C011AE4602400E9AF2F /* gsl_precision.h */,
-				8DA86BFC1AE45FC900E9AF2F /* gsl_sys.h */,
 				8DA86BFB1AE45FAD00E9AF2F /* gsl_math.h */,
 				8DA86BF91AE45F7800E9AF2F /* interp.c */,
 				8DA86BF81AE45F1600E9AF2F /* gsl_message.h */,
@@ -298,15 +349,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DA86C181AE6ED4900E9AF2F /* hc_unpack.c in Sources */,
 				8DA86BF71AE45EF100E9AF2F /* error.c in Sources */,
+				8DA86C2A1AE7070000E9AF2F /* infnan.c in Sources */,
 				8DBA87741A4C910200530FB7 /* AppDelegate.m in Sources */,
+				8DA86C331AEC284600E9AF2F /* linear.c in Sources */,
 				8DBA87B11A56E0A600530FB7 /* PulseDetector.cpp in Sources */,
 				8DA86BFA1AE45F7800E9AF2F /* interp.c in Sources */,
+				8DA86C2E1AEBD6A700E9AF2F /* log1p.c in Sources */,
+				8DA86C221AE6FB9200E9AF2F /* real_init.c in Sources */,
 				8DBA87811A4C917700530FB7 /* main.m in Sources */,
+				8DA86C281AE7065D00E9AF2F /* invhyp.c in Sources */,
 				8DBA87761A4C910200530FB7 /* ViewController.mm in Sources */,
+				8DA86C1F1AE6F54F00E9AF2F /* factorize.c in Sources */,
+				8DA86C1B1AE6F06700E9AF2F /* real_main.c in Sources */,
 				8DA86BF51AE45E7600E9AF2F /* spline.c in Sources */,
 				8DA86BE71AE456B800E9AF2F /* accel.c in Sources */,
+				8DA86C2C1AE7078C00E9AF2F /* fdiv.c in Sources */,
+				8DA86C261AE705FD00E9AF2F /* hypot.c in Sources */,
 				8DA86C031AE460A100E9AF2F /* stream.c in Sources */,
+				8DA86C241AE7046800E9AF2F /* math.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

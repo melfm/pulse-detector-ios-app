@@ -27,6 +27,8 @@
 #include "gsl_inline.h"
 #include "gsl_types.h"
 
+#define HAVE_INLINE 1
+
 #undef __BEGIN_DECLS
 #undef __END_DECLS
 #ifdef __cplusplus

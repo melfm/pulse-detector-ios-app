@@ -68,7 +68,7 @@
     
     // Call the FFT function for testing
     ////////////////////////////////////
-    
+    /*
     
     vDSP_Length Log2N = 10u;
     vDSP_Length N = (1u<<Log2N);
@@ -102,9 +102,7 @@
     fftConverter = pulseDetector.FFTHelperCreate(N);
     float *fftData = pulseDetector.computeFFT(fftConverter, Signal, N);
     
-    /*	Prepare expected results based on analytical transformation of
-     the input signal.
-     */
+  
     float *ExpectedMemory = (float*)malloc(N * sizeof *ExpectedMemory);
     if (ExpectedMemory == NULL)
     {
@@ -130,7 +128,7 @@
     
     // Compare the observed results to the expected results.
     pulseDetector.CompareComplexVectors(Expected, fftConverter->complexA, N/2);
-
+*/
 }
 
 - (void) handleTap: (UITapGestureRecognizer *)recognizer
