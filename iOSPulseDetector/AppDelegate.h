@@ -15,4 +15,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic, strong) UIAlertController* alert;
+@property (nonatomic, strong) UIAlertAction* allowCamAccess;
+@property (nonatomic, strong) UIAlertAction* cancelAccess;
+
 @end

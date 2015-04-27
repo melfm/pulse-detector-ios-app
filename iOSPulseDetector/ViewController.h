@@ -23,7 +23,6 @@
     cv::CascadeClassifier faceDetector;
     PulseDetector pulseDetector;
     BOOL beenTapped;
-   
 }
 
 @property (nonatomic, strong) CvVideoCamera* videoCamera;
@@ -34,6 +33,8 @@
     UIBarButtonItem* startCaptureButton;
 @property (nonatomic, weak) IBOutlet
     UIBarButtonItem* stopCaptureButton;
+
+
 
 -(IBAction)startCaptureButtonPressed:(id)sender;
 -(IBAction)stopCaptureButtonPressed:(id)sender;

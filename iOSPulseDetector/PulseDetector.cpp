@@ -20,54 +20,6 @@
 #include <vector>
 
 
-
-FFTHelperRef* PulseDetector::FFTHelperCreate(vDSP_Length numberOfSamples)
-{
-    FFTHelperRef *helperRef = (FFTHelperRef*) malloc(sizeof(FFTHelperRef));
-    vDSP_Length log2n = log2f(numberOfSamples);
-    helperRef->fftSetup = vDSP_create_fftsetup(log2n, FFT_RADIX2);
-    
-    int nOver2 = numberOfSamples/2;
-    
-    helperRef->complexA.realp = (float*) malloc(nOver2 * sizeof(float));
-    helperRef->complexA.imagp = (float*) malloc(nOver2 * sizeof(float));
-    
-    helperRef->outFFTData = (float*) malloc(nOver2 * sizeof(float) );
-    memset(helperRef->outFFTData, 0, nOver2 * sizeof(float));
-    
-    helperRef->invertedCheckData = (float*) malloc(numberOfSamples * sizeof(float) );
-    
-    return helperRef;
-}
-
-float* PulseDetector::computeFFT(FFTHelperRef *fftHelperRef, float *timeDomainData, vDSP_Length numSamples) {
-    
-    vDSP_Length log2n = log2f(numSamples);
-    Float32 mFFTNormFactor = 1.0/(2*numSamples);
-    
-    dump_float("Original Data",timeDomainData);
-    
-    //Convert float array of reals samples to COMPLEX_SPLIT array A
-    vDSP_ctoz((COMPLEX*)timeDomainData, 2, &(fftHelperRef->complexA), 1, numSamples/2);
-    
-    // Perform a real-to-complex FFT.
-    vDSP_fft_zrip(fftHelperRef->fftSetup, &(fftHelperRef->complexA), 1, log2n, FFT_FORWARD);
-    
-    //scale fft
-    vDSP_vsmul(fftHelperRef->complexA.realp, 1, &mFFTNormFactor, fftHelperRef->complexA.realp, 1, numSamples/2);
-    vDSP_vsmul(fftHelperRef->complexA.imagp, 1, &mFFTNormFactor, fftHelperRef->complexA.imagp, 1, numSamples/2);
-    
-    //vDSP_zvmags(&(fftHelperRef->complexA), 1, fftHelperRef->outFFTData, 1, numSamples/2);
-    
-    //to check everything (checking by reversing to time-domain data) =============================
-    vDSP_fft_zrip(fftHelperRef->fftSetup, &(fftHelperRef->complexA), 1, log2n, FFT_INVERSE);
-    vDSP_ztoc( &(fftHelperRef->complexA), 1, (COMPLEX *) fftHelperRef->invertedCheckData , 2, numSamples/2);
-    //=============================================================================================
-    dump_float("Inverted Back",fftHelperRef->invertedCheckData);
-    
-    return fftHelperRef->outFFTData;
-}
-
 void PulseDetector::getForehead(const cv::Rect& face, cv::Rect& forehead) {
     getSubface(face, forehead, 0.50, 0.13, 0.35, 0.20);
     return;
@@ -119,72 +71,10 @@ PU PulseDetector::estimateBPM(const cv::Mat& skin) {
     
     vector<double> hamming = hammingWindow(sampleSize);
     
-    
-    
-    
     list_multiply_vector(interpolated, hamming);
     
-   /* double totalMean = list_mean(interpolated);
+    double totalMean = list_mean(interpolated);
     list_subtract(interpolated, totalMean);
-    
-    int interpolated_size = 11;
-    float* outputInterpolation = (float*)malloc(interpolated_size * sizeof *outputInterpolation);
-    
-    int even_times_length = even_times.size();
-    float* even_times_floated = (float*)malloc(even_times_length * sizeof *even_times_floated);
-    
-    
-    for(int i =0; i < even_times.size(); ++i)
-    {
-        even_times_floated[i] = even_times[i];
-    }
-    
-    int _times_length = _times.size();
-    
-    float* _times_floated = (float*)malloc(_times_length * sizeof *even_times_floated);
-    
-    for(int i =0; i < _times.size(); ++i)
-    {
-        _times_floated[i] = _times[i];
-    }
-    
-    int _means_Length = _means.size();
-    
-    float* _means_floated = (float*)malloc(_means_Length * sizeof *_means_floated);
-    
-    for(int i =0; i < _means.size(); ++i)
-    {
-        _means_floated[i] = _means[i];
-    }
-    
-    long int L = even_times.size();
-    
-    
-    // linear interpolation between neighboring elements
-    ////////////////////////////////////////////////////////
-    vDSP_vlint(_means_floated, _times_floated, 1, outputInterpolation, 1, L, L);
-    
-    dump_float("Interpolation result", outputInterpolation);
-    
-    // Multiply by hamming window
-    list_multiply_vector(outputInterpolation, hamming);
-    
-    float totalMeanFloat = list_mean_float(outputInterpolation, sampleSize);
-    list_subtract(outputInterpolation, totalMeanFloat, sampleSize);
-    ////////////////////////////////////////////////////////
-    
-    
-    
-    dump("Interpolation GSL",interpolated);*/
-//    dump_float("Interpolation Accel", outputInterpolation);
-//    
-//    vector<double> outputInterpolated;
-//    
-//    for(int i =0; i < _means.size(); ++i)
-//    {
-//        outputInterpolated.push_back(_means_floated[i]);
-//
-//    }
     
     // One dimensional Discrete FFT
     vector<gsl_complex> fftraw = fft_transform(interpolated);
@@ -192,14 +82,9 @@ PU PulseDetector::estimateBPM(const cv::Mat& skin) {
     
     vector<double> angles = calculate_complex_angle(fftraw);
     
-    //vector<float> angles_Float = calculate_complex_angle_float(fftConverter, sampleSize);
-    
-
     // Get absolute values of FFT coefficients
     _fftabs = calculate_complex_abs(fftraw);
     
-    
-   // dump("Complex abs", _fftabs);
     
     // Frequencies using spaced values within interval 0 - L/2+1
     _frequencies = arange((sampleSize / 2) + 1);
@@ -355,10 +240,7 @@ vector<double> PulseDetector::interp(vector<double> interp_x, vector<double> dat
     return interpRes;
 }
 
-
-
 // ============================================================
-
 
 
 //
@@ -486,33 +368,4 @@ void PulseDetector::clearBuffers()
     _prunedfreq.clear();
     _bpms.clear();
     gap = 0;
-}
-
-
-/*	Compare two complex vectors and report the relative error between them.
-	(The vectors must have unit strides; other strides are not supported.)
- */
-void PulseDetector::CompareComplexVectors(
-                                  DSPSplitComplex Expected, DSPSplitComplex Observed, vDSP_Length Length)
-{
-    double_t Error = 0, Magnitude = 0;
-    
-    int i;
-    for (i = 0; i < Length; ++i)
-    {
-        double_t re, im;
-        
-        // Accumulate square of magnitude of elements.
-        re = Expected.realp[i];
-        im = Expected.imagp[i];
-        Magnitude += re*re + im*im;
-        
-        // Accumulate square of error.
-        re = Expected.realp[i] - Observed.realp[i];
-        im = Expected.imagp[i] - Observed.imagp[i];
-        Error += re*re + im*im;
-    }
-    
-    printf("\tRelative error in observed result is %g.\n",
-           sqrt(Error / Magnitude));
 }

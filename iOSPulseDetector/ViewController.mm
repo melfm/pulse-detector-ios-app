@@ -11,7 +11,7 @@
 
 #import "ViewController.h"
 
-
+#import <AVFoundation/AVFoundation.h>
 
 
 
@@ -27,9 +27,36 @@
 @synthesize toolbar;
 @synthesize videoCamera;
 
+
+
+- (int) permissionState {
+    
+    AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice error:nil];
+    if (!captureInput) {
+        return 501;
+    }
+    
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    switch (authStatus) {
+        case AVAuthorizationStatusAuthorized:
+            return 200;
+            
+        case AVAuthorizationStatusDenied:
+        case AVAuthorizationStatusRestricted:
+            return 403;
+            
+        case AVAuthorizationStatusNotDetermined:
+            return 0;
+    }
+
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // First
     
     // Instantiate the gesture recognizer
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -63,72 +90,31 @@
     isCapturing = NO;
     beenTapped = NO;
     
+//    if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType: completionHandler:)]) {
+//        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+//            // Will get here on both iOS 7 & 8 even though camera permissions weren't required
+//            // until iOS 8. So for iOS 7 permission will always be granted.
+//            if (granted) {
+//                // Permission has been granted. Use dispatch_async for any UI updating
+//                // code because this block may be executed in a thread.
+//                dispatch_async(dispatch_get_main_queue(), ^{
+////                    [videoCamera start];
+////                    isCapturing = YES;
+//                });
+//            } else {
+//                // Permission has been denied.
+//            }
+//        }];
+//    } else {
+//        // We are on iOS <= 6. Just do what we need to do.
+//        //[self doStuff];
+//        //Emmmm????
+//    }
+    
+    
     // Start clock for timestamping
     pulseDetector.startTimer();
     
-    // Call the FFT function for testing
-    ////////////////////////////////////
-    /*
-    
-    vDSP_Length Log2N = 10u;
-    vDSP_Length N = (1u<<Log2N);
-
-    cout << "Log2N " << Log2N << endl;
-    cout << "N : " << N << endl;
-    
-    static const float_t TwoPi = 0x3.243f6a8885a308d313198a2e03707344ap1;
-    
-    
-    // Generate input signal
-    const float Frequency0 = 79, Frequency1 = 296, Frequency2 = 143;
-    const float Phase0 = 0, Phase1 = .2f, Phase2 = .6f;
-    
-    // Allocate memory for the arrays.
-    float *Signal = (float*)malloc(N * sizeof Signal);
-    
-    
-    vDSP_Length i;
-    for ( i = 0; i < N; ++i) {
-        Signal[i] =
-        cos((i * Frequency0 / N + Phase0) * TwoPi)
-        + cos((i * Frequency1 / N + Phase1) * TwoPi)
-        + cos((i * Frequency2 / N + Phase2) * TwoPi);
-    }
-    
-    // The Main FFT Helper
-    FFTHelperRef *fftConverter = NULL;
-    
-    //initialize stuff
-    fftConverter = pulseDetector.FFTHelperCreate(N);
-    float *fftData = pulseDetector.computeFFT(fftConverter, Signal, N);
-    
-  
-    float *ExpectedMemory = (float*)malloc(N * sizeof *ExpectedMemory);
-    if (ExpectedMemory == NULL)
-    {
-        fprintf(stderr, "Error, failed to allocate memory.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    // Assign half of ExpectedMemory to reals and half to imaginaries.
-    DSPSplitComplex Expected = { ExpectedMemory, ExpectedMemory + N/2 };
-    
-    for (i = 0; i < N/2; ++i)
-        Expected.realp[i] = Expected.imagp[i] = 0;
-    
-    // Add the frequencies in the signal to the expected results.
-    Expected.realp[(int) Frequency0] = N * cos(Phase0 * TwoPi);
-    Expected.imagp[(int) Frequency0] = N * sin(Phase0 * TwoPi);
-    
-    Expected.realp[(int) Frequency1] = N * cos(Phase1 * TwoPi);
-    Expected.imagp[(int) Frequency1] = N * sin(Phase1 * TwoPi);
-    
-    Expected.realp[(int) Frequency2] = N * cos(Phase2 * TwoPi);
-    Expected.imagp[(int) Frequency2] = N * sin(Phase2 * TwoPi);
-    
-    // Compare the observed results to the expected results.
-    pulseDetector.CompareComplexVectors(Expected, fftConverter->complexA, N/2);
-*/
 }
 
 - (void) handleTap: (UITapGestureRecognizer *)recognizer
@@ -145,7 +131,6 @@
 {
     [videoCamera start];
     isCapturing = YES;
- 
 }
 
 -(IBAction)stopCaptureButtonPressed:(id)sender

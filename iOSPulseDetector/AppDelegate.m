@@ -13,6 +13,10 @@
 
 @implementation AppDelegate
 
+@synthesize  alert;
+@synthesize allowCamAccess;
+@synthesize cancelAccess;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -39,6 +43,34 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    alert=   [UIAlertController alertControllerWithTitle:@"\"PulseDetector\" Would Like to Access the Camera"
+                                                 message:nil
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    allowCamAccess = [UIAlertAction
+                      actionWithTitle:@"Ok"
+                      style:UIAlertActionStyleDefault
+                      handler:^(UIAlertAction * action)
+                      {
+                          [alert dismissViewControllerAnimated:YES completion:nil];
+
+                          
+                      }];
+    cancelAccess = [UIAlertAction
+                    actionWithTitle:@"Don't Allow"
+                    style:UIAlertActionStyleDefault
+                    handler:^(UIAlertAction * action)
+                    {
+                        [alert dismissViewControllerAnimated:YES completion:nil];
+                        // Exit the app? Cancel? What to do?
+                        
+                    }];
+    [alert addAction:cancelAccess];
+    [alert addAction:allowCamAccess];
+    [alert setModalPresentationStyle:UIModalPresentationPopover];
+
+    [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+    //[self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

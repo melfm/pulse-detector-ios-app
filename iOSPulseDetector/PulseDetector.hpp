@@ -153,9 +153,9 @@ public:
 //        }
 //        printf("\n");
 //    }
-    void dump_float(const string& label, float *data) {
+    void dump_float(const string& label, float *data, int size) {
         printf("%s",label.c_str());
-        for (int i = 0; i < sizeof(data); ++i) {
+        for (int i = 0; i < size; ++i) {
             printf("[%lf]", data[i]);
         }
         printf("\n");
