@@ -69,7 +69,7 @@
     [alert addAction:allowCamAccess];
     [alert setModalPresentationStyle:UIModalPresentationPopover];
 
-    [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+    //[self.window.rootViewController presentViewController:alert animated:YES completion:nil];
     //[self presentViewController:alert animated:YES completion:nil];
 }
 

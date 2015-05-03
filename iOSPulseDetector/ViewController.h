@@ -23,6 +23,9 @@
     cv::CascadeClassifier faceDetector;
     PulseDetector pulseDetector;
     BOOL beenTapped;
+    
+    AVCaptureDevice *_videoDevice;
+    dispatch_queue_t _captureSessionQueue; 
 }
 
 @property (nonatomic, strong) CvVideoCamera* videoCamera;
@@ -38,7 +41,6 @@
 
 -(IBAction)startCaptureButtonPressed:(id)sender;
 -(IBAction)stopCaptureButtonPressed:(id)sender;
-
 
 - (void)handleTap:(UITapGestureRecognizer *)sender;
 

@@ -11,7 +11,10 @@
 	<key>CFBundleIcons</key>
 	<dict/>
 	<key>CFBundleIcons~ipad</key>
-	<dict/>
+	<dict>
+		<key>New item</key>
+		<string></string>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>iOSProj.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -28,6 +31,8 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2015, Melissa Mozifian. All rights reserved</string>
 	<key>UILaunchStoryboardName</key>
 	<string>MainStoryboard_iPad</string>
 	<key>UIMainStoryboardFile</key>
@@ -49,7 +54,5 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>NSHumanReadableCopyright</key>
-	<string>© 2015, Melissa Mozifian. All rights reserved</string>
 </dict>
 </plist>

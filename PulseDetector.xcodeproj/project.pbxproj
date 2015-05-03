@@ -26,7 +26,6 @@
 		8DA86C031AE460A100E9AF2F /* stream.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C021AE460A100E9AF2F /* stream.c */; };
 		8DA86C181AE6ED4900E9AF2F /* hc_unpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C171AE6ED4900E9AF2F /* hc_unpack.c */; };
 		8DA86C1B1AE6F06700E9AF2F /* real_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C1A1AE6F06700E9AF2F /* real_main.c */; };
-		8DA86C1F1AE6F54F00E9AF2F /* factorize.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C1D1AE6F54F00E9AF2F /* factorize.c */; };
 		8DA86C221AE6FB9200E9AF2F /* real_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C211AE6FB9200E9AF2F /* real_init.c */; };
 		8DA86C241AE7046800E9AF2F /* math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C231AE7046800E9AF2F /* math.c */; };
 		8DA86C261AE705FD00E9AF2F /* hypot.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA86C251AE705FD00E9AF2F /* hypot.c */; };
@@ -94,7 +93,6 @@
 		8DA86C191AE6EDBF00E9AF2F /* complex_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = complex_internal.h; sourceTree = "<group>"; };
 		8DA86C1A1AE6F06700E9AF2F /* real_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = real_main.c; sourceTree = "<group>"; };
 		8DA86C1C1AE6F0B000E9AF2F /* real_pass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = real_pass.h; sourceTree = "<group>"; };
-		8DA86C1D1AE6F54F00E9AF2F /* factorize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = factorize.c; sourceTree = "<group>"; };
 		8DA86C1E1AE6F54F00E9AF2F /* factorize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = factorize.h; sourceTree = "<group>"; };
 		8DA86C201AE6F5A000E9AF2F /* gsl_fft_complex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gsl_fft_complex.h; sourceTree = "<group>"; };
 		8DA86C211AE6FB9200E9AF2F /* real_init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = real_init.c; sourceTree = "<group>"; };
@@ -234,7 +232,6 @@
 				8DA86C231AE7046800E9AF2F /* math.c */,
 				8DA86C211AE6FB9200E9AF2F /* real_init.c */,
 				8DA86C201AE6F5A000E9AF2F /* gsl_fft_complex.h */,
-				8DA86C1D1AE6F54F00E9AF2F /* factorize.c */,
 				8DA86C1E1AE6F54F00E9AF2F /* factorize.h */,
 				8DA86C1C1AE6F0B000E9AF2F /* real_pass.h */,
 				8DA86C1A1AE6F06700E9AF2F /* real_main.c */,
@@ -361,7 +358,6 @@
 				8DBA87811A4C917700530FB7 /* main.m in Sources */,
 				8DA86C281AE7065D00E9AF2F /* invhyp.c in Sources */,
 				8DBA87761A4C910200530FB7 /* ViewController.mm in Sources */,
-				8DA86C1F1AE6F54F00E9AF2F /* factorize.c in Sources */,
 				8DA86C1B1AE6F06700E9AF2F /* real_main.c in Sources */,
 				8DA86BF51AE45E7600E9AF2F /* spline.c in Sources */,
 				8DA86BE71AE456B800E9AF2F /* accel.c in Sources */,
@@ -457,10 +453,7 @@
 		83FA79361748FE9000248405 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7s,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PulseDetector/PulseDetector.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -486,13 +479,13 @@
 					"$(inherited)",
 					/Users/melissamozifian/Downloads/outdir,
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = PulseDetector;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s arm64 armv6 i386";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -500,10 +493,7 @@
 		83FA79371748FE9000248405 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7s,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PulseDetector/PulseDetector.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Melissa Mozifian (5676F898GA)";
@@ -529,13 +519,13 @@
 					"$(inherited)",
 					/Users/melissamozifian/Downloads/outdir,
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = PulseDetector;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s arm64 armv6 i386";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

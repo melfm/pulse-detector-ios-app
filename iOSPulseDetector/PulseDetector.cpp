@@ -206,9 +206,6 @@ vector<double> PulseDetector::interp(vector<double> interp_x, vector<double> dat
     vector<double> interp_y(interp_x.size());
     vector<double> interpRes;
     
-    
-    
-    
     // GSL function expects an array
     double data_y_array[data_y.size()];
     double data_x_array[data_x.size()];

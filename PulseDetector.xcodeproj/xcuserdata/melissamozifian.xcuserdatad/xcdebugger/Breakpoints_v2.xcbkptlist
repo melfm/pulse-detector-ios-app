@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSPulseDetector/ViewController.mm"
-            timestampString = "451859560.214941"
+            timestampString = "452380455.960088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "-processImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSPulseDetector/ViewController.mm"
-            timestampString = "451859560.214941"
+            timestampString = "452380455.960088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "-processImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSPulseDetector/PulseDetector.cpp"
-            timestampString = "451687094.174429"
+            timestampString = "452380455.960088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
             landmarkName = "PulseDetector::list_pruned(vector&lt;double&gt;&amp; data, vector&lt;double&gt;&amp; indices)"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSPulseDetector/ViewController.mm"
-            timestampString = "451859560.214941"
+            timestampString = "452380455.960088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
-            landmarkName = "-processImage:"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "-didReceiveMemoryWarning"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSPulseDetector/ViewController.mm"
-            timestampString = "451859560.214941"
+            timestampString = "452380455.960088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
-            landmarkName = "-processImage:"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "-viewDidDisappear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

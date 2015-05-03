@@ -28,41 +28,21 @@
 @synthesize videoCamera;
 
 
-
-- (int) permissionState {
-    
-    AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice error:nil];
-    if (!captureInput) {
-        return 501;
-    }
-    
-    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    switch (authStatus) {
-        case AVAuthorizationStatusAuthorized:
-            return 200;
-            
-        case AVAuthorizationStatusDenied:
-        case AVAuthorizationStatusRestricted:
-            return 403;
-            
-        case AVAuthorizationStatusNotDetermined:
-            return 0;
-    }
-
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // First
-    
+
+    NSError *error = nil;
+    // obtain device input to trigger camera access permission
+    AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:_videoDevice error:&error];
+    if (!videoDeviceInput)
+    {
+        // Do nothing
+    }
+   
     // Instantiate the gesture recognizer
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [tapGestureRecognizer setNumberOfTapsRequired: 1];
-    //[tapGestureRecognizer setNumberOfTouchesRequired: 1];
-    
     
     // Load cascade classifier from the XML file
     NSString* cascadePath = [[NSBundle mainBundle]
@@ -90,28 +70,6 @@
     isCapturing = NO;
     beenTapped = NO;
     
-//    if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType: completionHandler:)]) {
-//        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-//            // Will get here on both iOS 7 & 8 even though camera permissions weren't required
-//            // until iOS 8. So for iOS 7 permission will always be granted.
-//            if (granted) {
-//                // Permission has been granted. Use dispatch_async for any UI updating
-//                // code because this block may be executed in a thread.
-//                dispatch_async(dispatch_get_main_queue(), ^{
-////                    [videoCamera start];
-////                    isCapturing = YES;
-//                });
-//            } else {
-//                // Permission has been denied.
-//            }
-//        }];
-//    } else {
-//        // We are on iOS <= 6. Just do what we need to do.
-//        //[self doStuff];
-//        //Emmmm????
-//    }
-    
-    
     // Start clock for timestamping
     pulseDetector.startTimer();
     
@@ -125,12 +83,22 @@
     
 }
 
-
-
 -(IBAction)startCaptureButtonPressed:(id)sender
 {
-    [videoCamera start];
-    isCapturing = YES;
+
+   AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    switch (authStatus) {
+        case AVAuthorizationStatusAuthorized:
+            [videoCamera start];
+            isCapturing = YES;
+        case AVAuthorizationStatusDenied:
+        case AVAuthorizationStatusRestricted:
+           //Do nothing, we don't have permission
+        case AVAuthorizationStatusNotDetermined:
+            break;
+
+    }
+    
 }
 
 -(IBAction)stopCaptureButtonPressed:(id)sender
